@@ -8,25 +8,24 @@ public class CustomDoubleArray extends AbstractCustomArray {
 
     // public just for tests
     public CustomDoubleArray(double[] array) {
-        if (array == null) {
-            this.array = new double[0];
+        boolean isNotNull = array != null;
+
+        if (isNotNull) {
+            this.array = array.clone();
         } else {
-            int length = array.length;
-            this.array = Arrays.copyOf(array, length);
+            this.array = new double[0];
         }
     }
 
     public double[] getArray() {
-        int length = array.length;
-        return Arrays.copyOf(array, length);
+        return array.clone();
     }
 
     public void setArray(double[] array) {
         if (array == null) {
             this.array = new double[0];
         } else {
-            int length = array.length;
-            this.array = Arrays.copyOf(array, length);
+            this.array = array.clone();
         }
     }
 
@@ -47,6 +46,7 @@ public class CustomDoubleArray extends AbstractCustomArray {
         //Check that both classes are AbstractCustomArray
         Class<?> thisClass = getClass();
         Class<?> objClass = obj.getClass();
+
         if (thisClass != objClass) {
             return false;
         }

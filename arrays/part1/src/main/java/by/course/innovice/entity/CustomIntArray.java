@@ -8,25 +8,25 @@ public class CustomIntArray extends AbstractCustomArray {
 
     // public just for tests
     public CustomIntArray(int[] array) {
-        if (array == null) {
-            this.array = new int[0];
+
+        boolean isNotNull = array != null;
+
+        if (isNotNull) {
+            this.array = array.clone();
         } else {
-            int length = array.length;
-            this.array = Arrays.copyOf(array, length);
+            this.array = new int[0];
         }
     }
 
     public int[] getArray() {
-        int length = array.length;
-        return Arrays.copyOf(array, length);
+        return array.clone();
     }
 
     public void setArray(int[] array) {
         if (array == null) {
             this.array = new int[0];
         } else {
-            int length = array.length;
-            this.array = Arrays.copyOf(array, length);
+            this.array = array.clone();
         }
     }
 

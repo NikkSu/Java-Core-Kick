@@ -8,7 +8,6 @@ public class CustomIntArray extends AbstractCustomArray {
 
     // public just for tests
     public CustomIntArray(int[] array) {
-
         boolean isNotNull = array != null;
 
         if (isNotNull) {
@@ -23,10 +22,12 @@ public class CustomIntArray extends AbstractCustomArray {
     }
 
     public void setArray(int[] array) {
-        if (array == null) {
-            this.array = new int[0];
-        } else {
+        boolean isNotNull = array != null;
+
+        if (isNotNull) {
             this.array = array.clone();
+        } else {
+            this.array = new int[0];
         }
     }
 

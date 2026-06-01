@@ -22,11 +22,14 @@ public class CustomDoubleArray extends AbstractCustomArray {
     }
 
     public void setArray(double[] array) {
-        if (array == null) {
-            this.array = new double[0];
-        } else {
+        boolean isNotNull = array != null;
+
+        if (isNotNull) {
             this.array = array.clone();
+        } else {
+            this.array = new double[0];
         }
+
     }
 
     @Override

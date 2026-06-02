@@ -4,6 +4,7 @@ import by.course.innovice.entity.CustomIntArray;
 import by.course.innovice.exception.ArrayProcessingException;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class CustomIntArrayFactoryImplTest {
 
@@ -18,5 +19,13 @@ class CustomIntArrayFactoryImplTest {
         CustomIntArray actualCustomArray = factory.createArray(RAW_ARRAY);
 
         assertEquals(EXPECTED_CUSTOM_ARRAY, actualCustomArray);
+    }
+    @Test
+    void testCreateArray_NullArray_ThrowsException() {
+        int[] nullArray = null;
+
+        assertThrows(ArrayProcessingException.class, () -> {
+            factory.createArray(nullArray);
+        });
     }
 }

@@ -21,6 +21,15 @@ class ArrayLineValidatorImplTest {
     }
 
     @Test
+    void testIsValid_NullLine_ReturnsFalse() {
+        String nullLine = null;
+
+        boolean actualResult = validator.isValid(nullLine);
+
+        assertFalse(actualResult);
+    }
+
+    @Test
     void testIsValid_InvalidLineWithLetters_ReturnsFalse() {
         boolean actualResult = validator.isValid(INVALID_LINE_LETTERS);
 

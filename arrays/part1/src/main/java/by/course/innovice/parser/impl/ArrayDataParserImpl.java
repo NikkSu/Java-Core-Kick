@@ -9,9 +9,7 @@ public class ArrayDataParserImpl implements DataParser {
 
     private final Logger logger = LogManager.getLogger(ArrayDataParserImpl.class);
 
-    // Regex to find delimiters: dashes, spaces, commas, semicolons
     private static final String DELIMITER_REGEX = "[-–;\\s,]+";
-    // Regex to find delimiters ONLY at the beginning of the string
     private static final String LEADING_DELIMITER_REGEX = "^[-–;\\s,]+";
 
     @Override

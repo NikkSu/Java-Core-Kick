@@ -25,15 +25,15 @@ public class ArrayProcessingFacade {
     private final StringValidator doubleValidator;
     private final DataParser intParser;
     private final DoubleDataParser doubleParser;
-    private final CustomArrayFactory<CustomIntArray> intFactory;
-    private final CustomDoubleArrayFactoryImpl doubleFactory;
+    private final CustomArrayFactory<CustomIntArray, int[]> intFactory;
+    private final CustomArrayFactory<CustomDoubleArray, double[]> doubleFactory;
     private final ArrayMathService mathService;
     private final ArraySortService sortService;
 
     public ArrayProcessingFacade(DataReader reader, StringValidator intValidator, StringValidator doubleValidator,
                                  DataParser intParser, DoubleDataParser doubleParser,
-                                 CustomArrayFactory<CustomIntArray> intFactory,
-                                 CustomDoubleArrayFactoryImpl doubleFactory,
+                                 CustomArrayFactory<CustomIntArray, int[]> intFactory,
+                                 CustomArrayFactory<CustomDoubleArray, double[]> doubleFactory,
                                  ArrayMathService mathService, ArraySortService sortService) {
         this.reader = reader;
         this.intValidator = intValidator;
@@ -85,7 +85,7 @@ public class ArrayProcessingFacade {
                 logger.info("Original line: " + line);
 
                 double[] parsedDoubles = doubleParser.parseToDoubleArray(line);
-                CustomDoubleArray customDoubleArray = doubleFactory.createDoubleArray(parsedDoubles);
+                CustomDoubleArray customDoubleArray = doubleFactory.createArray(parsedDoubles);
                 String arrayString = customDoubleArray.toString();
                 logger.info("Created Entity: " + arrayString);
                 logger.info("===============================");

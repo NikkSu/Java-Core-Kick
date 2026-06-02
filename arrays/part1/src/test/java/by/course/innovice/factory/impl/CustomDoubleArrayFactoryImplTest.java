@@ -14,7 +14,7 @@ class CustomDoubleArrayFactoryImplTest {
 
     @Test
     void testCreateDoubleArray_ValidPrimitiveArray_ReturnsCustomDoubleArray() throws ArrayProcessingException {
-        CustomDoubleArray actualCustomArray = factory.createDoubleArray(RAW_ARRAY);
+        CustomDoubleArray actualCustomArray = factory.createArray(RAW_ARRAY);
 
         assertEquals(EXPECTED_CUSTOM_ARRAY, actualCustomArray);
     }

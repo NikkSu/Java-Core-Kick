@@ -34,7 +34,6 @@ public class ArrayDataParserImpl implements DataParser {
                         int number = Integer.parseInt(stringNumber);
                         numbers[i] = number;
                     } catch (NumberFormatException e) {
-                        logger.error("Failed to parse string to int: " + stringNumber, e);
                         throw new ArrayProcessingException("Invalid number format: " + stringNumber, e);
                     }
                 }

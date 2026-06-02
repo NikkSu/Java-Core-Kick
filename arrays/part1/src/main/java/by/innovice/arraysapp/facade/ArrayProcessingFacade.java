@@ -76,7 +76,7 @@ public class ArrayProcessingFacade {
             logger.info("Created Entity: " + arrayString);
 
             mathService.calculateSum(customIntArray);
-            sortService.bubbleSort(customIntArray);
+            sortService.insertionSort(customIntArray);
 
             String sortedArrayString = customIntArray.toString();
             logger.info("Result after sorting: " + sortedArrayString);

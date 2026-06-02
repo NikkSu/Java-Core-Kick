@@ -24,8 +24,8 @@ class ArraySortServiceImplTest {
     }
 
     @Test
-    void testBubbleSort_UnsortedArray_SortsCorrectly() throws ArrayProcessingException {
-        sortService.bubbleSort(arrayForBubble);
+    void testInsertionSort_UnsortedArray_SortsCorrectly() throws ArrayProcessingException {
+        sortService.insertionSort(arrayForBubble);
         assertEquals(expectedSortedArray, arrayForBubble);
     }
 

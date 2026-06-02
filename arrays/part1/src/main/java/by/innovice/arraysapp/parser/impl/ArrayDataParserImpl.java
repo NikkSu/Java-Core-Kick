@@ -9,7 +9,7 @@ public class ArrayDataParserImpl implements DataParser {
 
     private final Logger logger = LogManager.getLogger(ArrayDataParserImpl.class);
 
-    private static final String DELIMITER_REGEX = "[-–;\\s,]+";
+    private static final String FULL_DELIMITER_REGEX = "[-–;\\s,]+";
     private static final String LEADING_DELIMITER_REGEX = "^[-–;\\s,]+";
 
     @Override
@@ -18,13 +18,13 @@ public class ArrayDataParserImpl implements DataParser {
 
         if (isNotNull) {
             String cleanedLine = line.replaceFirst(LEADING_DELIMITER_REGEX, "");
-            boolean isEmpty = cleanedLine.isEmpty();
+            boolean isBlank = cleanedLine.isBlank();
 
-            if (isEmpty) {
+            if (isBlank) {
                 logger.info("Line contains no numbers, returning empty array");
                 return new int[0];
             } else {
-                String[] stringNumbers = cleanedLine.split(DELIMITER_REGEX);
+                String[] stringNumbers = cleanedLine.split(FULL_DELIMITER_REGEX);
                 int length = stringNumbers.length;
                 int[] numbers = new int[length];
 

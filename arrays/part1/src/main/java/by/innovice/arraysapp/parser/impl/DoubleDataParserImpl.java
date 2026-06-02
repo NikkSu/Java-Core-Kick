@@ -9,7 +9,7 @@ public class DoubleDataParserImpl implements DoubleDataParser {
 
     private final Logger logger = LogManager.getLogger(DoubleDataParserImpl.class);
 
-    private static final String DELIMITER_REGEX = "[-–;\\s,]+";
+    private static final String FULL_DELIMITER_REGEX = "[-–;\\s,]+";
     private static final String LEADING_DELIMITER_REGEX = "^[-–;\\s,]+";
 
     @Override
@@ -18,13 +18,13 @@ public class DoubleDataParserImpl implements DoubleDataParser {
 
         if (isNotNull) {
             String cleanedLine = line.replaceFirst(LEADING_DELIMITER_REGEX, "");
-            boolean isEmpty = cleanedLine.isEmpty();
+            boolean isBlank = cleanedLine.isBlank();
 
-            if (isEmpty) {
+            if (isBlank) {
                 logger.info("Line is empty, returning empty double array");
                 return new double[0];
             } else {
-                String[] stringNumbers = cleanedLine.split(DELIMITER_REGEX);
+                String[] stringNumbers = cleanedLine.split(FULL_DELIMITER_REGEX);
                 int length = stringNumbers.length;
                 double[] numbers = new double[length];
 

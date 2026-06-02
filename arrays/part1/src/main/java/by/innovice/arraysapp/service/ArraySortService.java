@@ -5,7 +5,7 @@ import by.innovice.arraysapp.exception.ArrayProcessingException;
 
 public interface ArraySortService {
 
-    void bubbleSort(CustomIntArray customArray) throws ArrayProcessingException;
+    void insertionSort(CustomIntArray customArray) throws ArrayProcessingException;
 
     void selectionSort(CustomIntArray customArray) throws ArrayProcessingException;
 }

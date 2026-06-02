@@ -11,7 +11,7 @@ public class ArraySortServiceImpl implements ArraySortService {
     private final Logger logger = LogManager.getLogger(ArraySortServiceImpl.class);
 
     @Override
-    public void bubbleSort(CustomIntArray customArray) throws ArrayProcessingException {
+    public void insertionSort(CustomIntArray customArray) throws ArrayProcessingException {
         boolean isNotNull = customArray != null;
 
         if (isNotNull) {
@@ -20,22 +20,18 @@ public class ArraySortServiceImpl implements ArraySortService {
             boolean canSort = length > 1;
 
             if (canSort) {
-                int lastIndex = length - 1;
-                for (int i = 0; i < lastIndex; i++) {
-                    int innerBoundary = length - i - 1;
-                    for (int j = 0; j < innerBoundary; j++) {
-                        int current = array[j];
-                        int next = array[j + 1];
-                        boolean isGreater = current > next;
+                for (int i = 1; i < length; i++) {
+                    int key = array[i];
+                    int j = i - 1;
 
-                        if (isGreater) {
-                            array[j] = next;
-                            array[j + 1] = current;
-                        }
+                    while (j >= 0 && array[j] > key) {
+                        array[j + 1] = array[j];
+                        j = j - 1;
                     }
+                    array[j + 1] = key;
                 }
                 customArray.setArray(array);
-                logger.info("Array sorted using Bubble Sort");
+                logger.info("Array sorted using Insertion Sort");
             } else {
                 logger.info("Array is too small to sort or empty");
             }

@@ -10,8 +10,7 @@ public class CustomDoubleArrayFactoryImpl implements CustomArrayFactory<CustomDo
     public CustomDoubleArray createArray(double[] array) throws ArrayProcessingException {
         boolean isNotNull = array != null;
         if (isNotNull) {
-            CustomDoubleArray customDoubleArray = new CustomDoubleArray(array);
-            return customDoubleArray;
+            return new CustomDoubleArray(array);
         } else {
             throw new ArrayProcessingException("Array cannot be null");
         }

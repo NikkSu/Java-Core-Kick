@@ -10,8 +10,7 @@ public class CustomIntArrayFactoryImpl implements CustomArrayFactory<CustomIntAr
     public CustomIntArray createArray(int[] array) throws ArrayProcessingException {
         boolean isNotNull = array != null;
         if (isNotNull) {
-            CustomIntArray customIntArray = new CustomIntArray(array);
-            return customIntArray;
+            return new CustomIntArray(array);
         } else {
             throw new ArrayProcessingException("Array cannot be null");
         }

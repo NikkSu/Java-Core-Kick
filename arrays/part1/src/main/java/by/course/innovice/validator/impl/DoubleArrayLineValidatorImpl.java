@@ -11,8 +11,7 @@ public class DoubleArrayLineValidatorImpl implements StringValidator {
         boolean isNotNull = line != null;
 
         if (isNotNull) {
-            boolean isMatching = line.matches(VALID_DOUBLE_LINE_REGEX);
-            return isMatching;
+            return line.matches(VALID_DOUBLE_LINE_REGEX);
         } else {
             return false;
         }

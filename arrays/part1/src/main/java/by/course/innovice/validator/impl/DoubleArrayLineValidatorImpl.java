@@ -4,7 +4,7 @@ import by.course.innovice.validator.StringValidator;
 
 public class DoubleArrayLineValidatorImpl implements StringValidator {
 
-    private static final String VALID_DOUBLE_LINE_REGEX = "^[-–;\\s,\\d\\.]*$";
+    private static final String VALID_DOUBLE_LINE_REGEX = "^([-–;\\s,]*\\d+(\\.\\d+)?)*[-–;\\s,]*$";
 
     @Override
     public boolean isValid(String line) {

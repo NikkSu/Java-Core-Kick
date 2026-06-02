@@ -4,7 +4,6 @@ import by.course.innovice.entity.CustomDoubleArray;
 import by.course.innovice.entity.CustomIntArray;
 import by.course.innovice.exception.ArrayProcessingException;
 import by.course.innovice.factory.CustomArrayFactory;
-import by.course.innovice.factory.impl.CustomDoubleArrayFactoryImpl;
 import by.course.innovice.parser.DataParser;
 import by.course.innovice.parser.DoubleDataParser;
 import by.course.innovice.reader.DataReader;
@@ -51,11 +50,15 @@ public class ArrayProcessingFacade {
             List<String> lines = reader.readLines(filePath);
 
             for (String line : lines) {
-                processSingleLine(line);
+                try {
+                    processSingleLine(line);
+                } catch (ArrayProcessingException e) {
+                    logger.error("Failed to process line: " + line + " | Error: " + e.getMessage());
+                }
             }
 
         } catch (ArrayProcessingException e) {
-            logger.error("Critical error while reading file", e);
+            logger.error("Critical error: could not read the file at " + filePath, e);
         }
     }
 

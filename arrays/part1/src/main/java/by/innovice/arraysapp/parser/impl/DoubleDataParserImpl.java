@@ -7,7 +7,7 @@ import org.apache.logging.log4j.Logger;
 
 public class DoubleDataParserImpl implements DoubleDataParser {
 
-    private final Logger logger = LogManager.getLogger(DoubleDataParserImpl.class);
+    private static final Logger logger = LogManager.getLogger(DoubleDataParserImpl.class);
 
     private static final String FULL_DELIMITER_REGEX = "[-–;\\s,]+";
     private static final String LEADING_DELIMITER_REGEX = "^[-–;\\s,]+";

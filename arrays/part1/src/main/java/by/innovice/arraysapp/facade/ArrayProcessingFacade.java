@@ -17,7 +17,7 @@ import java.util.List;
 
 public class ArrayProcessingFacade {
 
-    private final Logger logger = LogManager.getLogger(ArrayProcessingFacade.class);
+    private static final Logger logger = LogManager.getLogger(ArrayProcessingFacade.class);
 
     private final DataReader reader;
     private final StringValidator intValidator;

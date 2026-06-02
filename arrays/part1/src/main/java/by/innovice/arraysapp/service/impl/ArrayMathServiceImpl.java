@@ -10,7 +10,7 @@ import java.util.OptionalInt;
 
 public class ArrayMathServiceImpl implements ArrayMathService {
 
-    private final Logger logger = LogManager.getLogger(ArrayMathServiceImpl.class);
+    private static final Logger logger = LogManager.getLogger(ArrayMathServiceImpl.class);
 
     @Override
     public OptionalInt findMin(CustomIntArray customArray) {

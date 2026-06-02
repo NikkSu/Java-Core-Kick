@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 
 public class FileDataReaderImpl implements DataReader {
 
-    private final Logger logger = LogManager.getLogger(FileDataReaderImpl.class);
+    private static final Logger logger = LogManager.getLogger(FileDataReaderImpl.class);
 
     @Override
     public List<String> readLines(String filePath) throws ArrayProcessingException {

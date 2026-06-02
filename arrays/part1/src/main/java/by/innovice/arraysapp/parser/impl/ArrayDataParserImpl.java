@@ -7,7 +7,7 @@ import org.apache.logging.log4j.Logger;
 
 public class ArrayDataParserImpl implements DataParser {
 
-    private final Logger logger = LogManager.getLogger(ArrayDataParserImpl.class);
+    private static final Logger logger = LogManager.getLogger(ArrayDataParserImpl.class);
 
     private static final String FULL_DELIMITER_REGEX = "[-–;\\s,]+";
     private static final String LEADING_DELIMITER_REGEX = "^[-–;\\s,]+";

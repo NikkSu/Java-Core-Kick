@@ -8,7 +8,7 @@ import org.apache.logging.log4j.Logger;
 
 public class ArraySortServiceImpl implements ArraySortService {
 
-    private final Logger logger = LogManager.getLogger(ArraySortServiceImpl.class);
+    private static final Logger logger = LogManager.getLogger(ArraySortServiceImpl.class);
 
     @Override
     public void insertionSort(CustomIntArray customArray) throws ArrayProcessingException {

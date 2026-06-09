@@ -1,7 +1,7 @@
 package com.nikita.arraysapp.specification.impl;
 
 import com.nikita.arraysapp.entity.CustomIntArray;
-import com.nikita.arraysapp.service.ArrayMathService; // Импортируем сервис
+import com.nikita.arraysapp.service.ArrayMathService;
 import com.nikita.arraysapp.specification.Specification;
 import com.nikita.arraysapp.warehouse.ArrayWarehouse;
 import com.nikita.arraysapp.warehouse.WarehouseStats;

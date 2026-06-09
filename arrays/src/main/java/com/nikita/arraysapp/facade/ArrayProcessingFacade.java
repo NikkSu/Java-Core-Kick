@@ -47,8 +47,6 @@ public class ArrayProcessingFacade {
         this.sortService = sortService;
     }
 
-    // Внутри ArrayProcessingFacade.java
-
     public List<CustomIntArray> processFile(String filePath) {
         List<CustomIntArray> resultList = new ArrayList<>();
         try {
@@ -58,7 +56,7 @@ public class ArrayProcessingFacade {
                     if (intValidator.isValid(line)) {
                         int[] parsedInts = intParser.parseToIntArray(line);
                         CustomIntArray customIntArray = intFactory.createArray(parsedInts);
-                        resultList.add(customIntArray); // Сохраняем результат
+                        resultList.add(customIntArray);
                     } else {
                         logger.warn("Skipping invalid line: " + line);
                     }

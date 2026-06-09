@@ -58,10 +58,10 @@ class ArrayRepositoryTest {
 
     @Test
     void testQuery_SumGreaterThanSpecification_ReturnsCorrectArrays() {
-        int sumThreshold = 40; // arrayTwo (60) and arrayThree (50) should match
+        int sumThreshold = 40;
         int expectedSize = 2;
 
-        List<CustomIntArray> result = repository.query(new SumGreaterThanSpecification(sumThreshold));
+        List<CustomIntArray> result = repository.query(new SumGreaterThanSpecification(sumThreshold, mathService));
 
         int actualSize = result.size();
         assertEquals(expectedSize, actualSize);
@@ -69,7 +69,7 @@ class ArrayRepositoryTest {
 
     @Test
     void testQuery_LengthLessThanSpecification_ReturnsCorrectArrays() {
-        int lengthThreshold = 3; // Only arrayThree (length 2) matches
+        int lengthThreshold = 3;
         int expectedSize = 1;
 
         List<CustomIntArray> result = repository.query(new LengthLessThanSpecification(lengthThreshold));

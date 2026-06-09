@@ -9,6 +9,7 @@ import com.nikita.arraysapp.warehouse.ArrayWarehouse;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class ArrayRepository {
     private static ArrayRepository instance;
@@ -54,6 +55,15 @@ public class ArrayRepository {
                 ArrayWarehouse.getInstance().remove(array.getId());
             }
         }
+    }
+    public List<CustomIntArray> streamQuery(Specification<CustomIntArray> spec) {
+        Stream<CustomIntArray> stream = storage.stream();
+
+        List<CustomIntArray> result = stream
+                .filter(spec::isSatisfied)
+                .toList();
+
+        return result;
     }
 
     public List<CustomIntArray> query(Specification<CustomIntArray> spec) {

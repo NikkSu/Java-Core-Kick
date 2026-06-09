@@ -2,7 +2,7 @@ package com.nikita.arraysapp.observer;
 
 import com.nikita.arraysapp.entity.CustomIntArray;
 import com.nikita.arraysapp.exception.ArrayProcessingException;
-import com.nikita.arraysapp.observer.impl.WarehouseObserverImpl; // Импортируем новый обсервер
+import com.nikita.arraysapp.observer.impl.WarehouseObserverImpl;
 import com.nikita.arraysapp.repository.ArrayRepository;
 import com.nikita.arraysapp.service.impl.ArrayMathServiceImpl;
 import com.nikita.arraysapp.warehouse.ArrayWarehouse;

@@ -6,16 +6,14 @@ import com.nikita.arraysapp.observer.ArrayObserver;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class CustomIntArray extends AbstractCustomArray {
 
     private final Logger logger = LogManager.getLogger(CustomIntArray.class);
 
     private int[] array;
     private final long id;
-    private final List<ArrayObserver> observers = new ArrayList<>();
+
+    private ArrayObserver observer;
 
     public CustomIntArray(long id, int[] array) throws ArrayProcessingException {
         this.id = id;
@@ -25,22 +23,20 @@ public class CustomIntArray extends AbstractCustomArray {
     public void attach(ArrayObserver observer) {
         boolean isNotNull = observer != null;
         if (isNotNull) {
-            observers.add(observer);
+            this.observer = observer;
             logger.debug("Observer attached to array id: {}", id);
         }
     }
 
     public void detach(ArrayObserver observer) {
-        boolean isNotNull = observer != null;
-        if (isNotNull) {
-            observers.remove(observer);
-            logger.debug("Observer detached from array id: {}", id);
-        }
+        this.observer = null;
+        logger.debug("Observer detached from array id: {}", id);
     }
 
     public void notifyObservers() {
-        ArrayEvent event = new ArrayEvent(this);
-        for (ArrayObserver observer : observers) {
+        boolean isNotNull = observer != null;
+        if (isNotNull) {
+            ArrayEvent event = new ArrayEvent(this);
             observer.update(event);
         }
     }

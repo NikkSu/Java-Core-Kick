@@ -1,4 +1,4 @@
-# Arrays Processing - Part I
+# Arrays Processing
 
 ## How to run
 1. Ensure you have the `data/arrays.txt` file in the correct directory.

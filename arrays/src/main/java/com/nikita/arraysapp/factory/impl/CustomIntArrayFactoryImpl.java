@@ -6,13 +6,13 @@ import com.nikita.arraysapp.factory.CustomArrayFactory;
 
 public class CustomIntArrayFactoryImpl implements CustomArrayFactory<CustomIntArray, int[]> {
 
-    private static int idGenerator = 1;
+    private static long idGenerator = 1L;
 
     @Override
     public CustomIntArray createArray(int[] array) throws ArrayProcessingException {
         boolean isNotNull = array != null;
         if (isNotNull) {
-            int currentId = idGenerator++;
+            long currentId = idGenerator++;
             return new CustomIntArray(currentId, array);
         } else {
             throw new ArrayProcessingException("Array cannot be null");

@@ -18,9 +18,9 @@ class ArraySortServiceImplTest {
 
     @BeforeEach
     void setUp() throws ArrayProcessingException {
-        arrayForBubble = new CustomIntArray(new int[]{5, 1, 4, 2, 8});
-        arrayForSelection = new CustomIntArray(new int[]{5, 1, 4, 2, 8});
-        expectedSortedArray = new CustomIntArray(new int[]{1, 2, 4, 5, 8});
+        arrayForBubble = new CustomIntArray(1,new int[]{5, 1, 4, 2, 8});
+        arrayForSelection = new CustomIntArray(1,new int[]{5, 1, 4, 2, 8});
+        expectedSortedArray = new CustomIntArray(1,new int[]{1, 2, 4, 5, 8});
     }
 
     @Test

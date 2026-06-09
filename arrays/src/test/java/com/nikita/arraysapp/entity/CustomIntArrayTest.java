@@ -17,8 +17,8 @@ class CustomIntArrayTest {
     @BeforeEach
     void setUp() throws ArrayProcessingException {
         arrayOne = new CustomIntArray(1,new int[]{1, 2, 3});
-        arrayTwo = new CustomIntArray(2,new int[]{1, 2, 3});
-        differentArray = new CustomIntArray(3,new int[]{4, 5});
+        arrayTwo = new CustomIntArray(1,new int[]{1, 2, 3});
+        differentArray = new CustomIntArray(1,new int[]{4, 5});
     }
 
     @Test

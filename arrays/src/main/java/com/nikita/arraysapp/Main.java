@@ -15,8 +15,7 @@ import com.nikita.arraysapp.service.impl.ArraySortServiceImpl;
 import com.nikita.arraysapp.specification.impl.SumGreaterThanSpecification;
 import com.nikita.arraysapp.validator.impl.ArrayLineValidatorImpl;
 import com.nikita.arraysapp.validator.impl.DoubleArrayLineValidatorImpl;
-import com.nikita.arraysapp.warehouse.Warehouse;
-import com.nikita.arraysapp.warehouse.WarehouseCalculator;
+import com.nikita.arraysapp.warehouse.ArrayWarehouse;
 import com.nikita.arraysapp.warehouse.WarehouseStats;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -47,10 +46,12 @@ public class Main {
         );
 
         ArrayRepository repository = ArrayRepository.getInstance();
-        Warehouse warehouse = Warehouse.getInstance();
-        WarehouseCalculator calculator = new WarehouseCalculator(mathService);
+        ArrayWarehouse arrayWarehouse = ArrayWarehouse.getInstance();
 
-        repository.getObserver().subscribe(calculator::recalculateAll);
+        com.nikita.arraysapp.observer.impl.WarehouseObserverImpl observer =
+                new com.nikita.arraysapp.observer.impl.WarehouseObserverImpl(mathService);
+
+        repository.setArrayObserver(observer);
 
         logger.info("\n=== PROCESSING FILE ===");
         facade.processFile("arrays/data/arrays.txt");
@@ -59,7 +60,7 @@ public class Main {
         logger.info("\n=== WAREHOUSE STATS (Auto-calculated by Observer) ===");
         List<CustomIntArray> storage = repository.getStorage();
         for (CustomIntArray arr : storage) {
-            WarehouseStats stats = warehouse.getStats(arr.getId());
+            WarehouseStats stats = arrayWarehouse.getStats(arr.getId());
             if (stats != null) {
                 logger.info(String.format("Array ID: %d | Sum=%d, Max=%d, Min=%d, Avg=%.2f",
                         arr.getId(), stats.sum(), stats.max(), stats.min(), stats.average()));
@@ -68,16 +69,14 @@ public class Main {
             }
         }
 
-
-        // 5. ТЕСТ: РУЧНОЕ ДОБАВЛЕНИЕ (Проверяем авто-обновление склада)
         logger.info("\n=== TEST: ADDING NEW ARRAY ===");
         try {
-            CustomIntArray newArray = intFactory.createArray(new int[]{900, 100});
+            CustomIntArray newArray = intFactory.createArray(new int[]{900, 100, 55, 44});
             logger.info("Created manual array with ID: " + newArray.getId());
 
-            repository.add(newArray); // <--- Тут Observer должен сработать сам!
+            repository.add(newArray);
 
-            WarehouseStats newStats = warehouse.getStats(newArray.getId());
+            WarehouseStats newStats = arrayWarehouse.getStats(newArray.getId());
             if (newStats != null) {
                 logger.info("Auto-calculated stats for NEW array: Sum=" + newStats.sum());
             }
@@ -86,23 +85,40 @@ public class Main {
         }
 
 
-        // 6. ТЕСТ: СПЕЦИФИКАЦИЯ (ПОИСК)
         logger.info("\n=== SPECIFICATION SEARCH ===");
         int sumThreshold = 50;
         logger.info("Looking for arrays with SUM > " + sumThreshold);
 
-        List<CustomIntArray> richArrays = repository.find(new SumGreaterThanSpecification(sumThreshold));
+        List<CustomIntArray> richArrays = repository.query(new SumGreaterThanSpecification(sumThreshold));
         for (CustomIntArray arr : richArrays) {
             logger.info("Found Array ID: " + arr.getId() + " (Elements: " + arr.length() + ")");
         }
 
-
-        // 7. ТЕСТ: СОРТИРОВКА (COMPARATOR)
         logger.info("\n=== REPOSITORY SORTING BY LENGTH ===");
         repository.sort(CustomArrayComparator.BY_LENGTH);
 
         for (CustomIntArray arr : repository.getStorage()) {
             logger.info("ID: " + arr.getId() + " | Length: " + arr.length());
+        }
+
+        logger.info("\n=== TEST: UPDATING EXISTING ARRAY DATA (ID: 1) ===");
+        try {
+            List<CustomIntArray> all = repository.getStorage();
+            if (!all.isEmpty()) {
+                CustomIntArray firstArray = all.get(0);
+                long id = firstArray.getId();
+
+                WarehouseStats oldStats = arrayWarehouse.getStats(id);
+                logger.info("Before update: ID=" + id + " | Data=" + firstArray + " | Sum=" + oldStats.sum());
+
+                logger.info("Updating data to [100, 100, 100]...");
+                firstArray.setArray(new int[]{100, 100, 100});
+
+                WarehouseStats newStats = arrayWarehouse.getStats(id);
+                logger.info("After update:  ID=" + id + " | Data=" + firstArray + " | NEW Sum=" + newStats.sum());
+            }
+        } catch (ArrayProcessingException e) {
+            logger.error("Update test failed", e);
         }
 
         logger.info("=== SYSTEM SHUTDOWN ===");

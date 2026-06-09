@@ -19,8 +19,8 @@ class ArrayMathServiceImplTest {
 
     @BeforeEach
     void setUp() throws ArrayProcessingException {
-        normalArray = new CustomIntArray(new int[]{5, 2, 8, 1, 9});
-        emptyArray = new CustomIntArray(new int[]{});
+        normalArray = new CustomIntArray(1,new int[]{5, 2, 8, 1, 9});
+        emptyArray = new CustomIntArray(2,new int[]{});
     }
 
     @Test

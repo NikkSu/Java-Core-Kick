@@ -8,7 +8,7 @@ public class CustomArrayComparator {
     public static final Comparator<CustomIntArray> BY_ID = new Comparator<CustomIntArray>() {
         @Override
         public int compare(CustomIntArray o1, CustomIntArray o2) {
-            return Integer.compare(o1.getId(), o2.getId());
+            return Long.compare(o1.getId(), o2.getId());
         }
     };
 

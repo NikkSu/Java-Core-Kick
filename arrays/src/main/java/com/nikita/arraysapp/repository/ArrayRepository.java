@@ -1,8 +1,10 @@
 package com.nikita.arraysapp.repository;
 
 import com.nikita.arraysapp.entity.CustomIntArray;
-import com.nikita.arraysapp.observer.Observer;
+import com.nikita.arraysapp.observer.ArrayEvent;
+import com.nikita.arraysapp.observer.ArrayObserver;
 import com.nikita.arraysapp.specification.Specification;
+import com.nikita.arraysapp.warehouse.ArrayWarehouse;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -10,10 +12,8 @@ import java.util.List;
 
 public class ArrayRepository {
     private static ArrayRepository instance;
-
     private final List<CustomIntArray> storage = new ArrayList<>();
-
-    private final Observer observer = new Observer();
+    private ArrayObserver arrayObserver;
 
     private ArrayRepository() {}
 
@@ -24,8 +24,8 @@ public class ArrayRepository {
         return instance;
     }
 
-    public Observer getObserver() {
-        return observer;
+    public void setArrayObserver(ArrayObserver arrayObserver) {
+        this.arrayObserver = arrayObserver;
     }
 
     public List<CustomIntArray> getStorage() {
@@ -35,18 +35,28 @@ public class ArrayRepository {
     public void add(CustomIntArray array) {
         if (array != null) {
             storage.add(array);
-            observer.fireEvent();
+
+            if (arrayObserver != null) {
+                array.attach(arrayObserver);
+
+                ArrayEvent event = new ArrayEvent(array);
+                arrayObserver.update(event);
+            }
         }
     }
 
     public void remove(CustomIntArray array) {
         if (array != null) {
             storage.remove(array);
-            observer.fireEvent();
+
+            if (arrayObserver != null) {
+                array.detach(arrayObserver);
+                ArrayWarehouse.getInstance().remove(array.getId());
+            }
         }
     }
 
-    public List<CustomIntArray> find(Specification<CustomIntArray> spec) {
+    public List<CustomIntArray> query(Specification<CustomIntArray> spec) {
         List<CustomIntArray> result = new ArrayList<>();
         for (CustomIntArray array : storage) {
             if (spec.isSatisfied(array)) {
@@ -58,5 +68,9 @@ public class ArrayRepository {
 
     public void sort(Comparator<CustomIntArray> comparator) {
         storage.sort(comparator);
+    }
+
+    public void clear() {
+        storage.clear();
     }
 }

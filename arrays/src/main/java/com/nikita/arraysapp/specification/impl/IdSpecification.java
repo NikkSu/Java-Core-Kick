@@ -4,9 +4,9 @@ import com.nikita.arraysapp.entity.CustomIntArray;
 import com.nikita.arraysapp.specification.Specification;
 
 public class IdSpecification implements Specification<CustomIntArray> {
-    private final int desiredId;
+    private final long desiredId;
 
-    public IdSpecification(int desiredId) {
+    public IdSpecification(long desiredId) {
         this.desiredId = desiredId;
     }
 

@@ -1,19 +1,51 @@
 package com.nikita.arraysapp.entity;
 
 import com.nikita.arraysapp.exception.ArrayProcessingException;
+import com.nikita.arraysapp.observer.ArrayEvent;
+import com.nikita.arraysapp.observer.ArrayObserver;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CustomIntArray extends AbstractCustomArray {
 
-    private final int id;
-    private int[] array;
+    private final Logger logger = LogManager.getLogger(CustomIntArray.class);
 
-    // public just for tests
-    public CustomIntArray(int id, int[] array) throws ArrayProcessingException {
+    private int[] array;
+    private final long id;
+    private final List<ArrayObserver> observers = new ArrayList<>();
+
+    public CustomIntArray(long id, int[] array) throws ArrayProcessingException {
         this.id = id;
         setArray(array);
     }
 
-    public int getId() {
+    public void attach(ArrayObserver observer) {
+        boolean isNotNull = observer != null;
+        if (isNotNull) {
+            observers.add(observer);
+            logger.debug("Observer attached to array id: {}", id);
+        }
+    }
+
+    public void detach(ArrayObserver observer) {
+        boolean isNotNull = observer != null;
+        if (isNotNull) {
+            observers.remove(observer);
+            logger.debug("Observer detached from array id: {}", id);
+        }
+    }
+
+    public void notifyObservers() {
+        ArrayEvent event = new ArrayEvent(this);
+        for (ArrayObserver observer : observers) {
+            observer.update(event);
+        }
+    }
+
+    public long getId() {
         return id;
     }
 
@@ -22,8 +54,21 @@ public class CustomIntArray extends AbstractCustomArray {
 
         if (isNotNull) {
             this.array = array.clone();
+            notifyObservers();
         } else {
             throw new ArrayProcessingException("Array cannot be null");
+        }
+    }
+
+    public void setElement(int index, int value) throws ArrayProcessingException {
+        int length = array.length;
+        boolean isValidIndex = index >= 0 && index < length;
+
+        if (isValidIndex) {
+            array[index] = value;
+            notifyObservers();
+        } else {
+            throw new ArrayProcessingException("Index out of bounds: " + index);
         }
     }
 
@@ -45,7 +90,6 @@ public class CustomIntArray extends AbstractCustomArray {
             return false;
         }
 
-        //Check that both classes are CustomIntArray
         Class<?> thisClass = getClass();
         Class<?> objClass = obj.getClass();
         if (thisClass != objClass) {
@@ -70,7 +114,7 @@ public class CustomIntArray extends AbstractCustomArray {
 
     @Override
     public int hashCode() {
-        return id;
+        return Long.hashCode(id);
     }
 
     @Override

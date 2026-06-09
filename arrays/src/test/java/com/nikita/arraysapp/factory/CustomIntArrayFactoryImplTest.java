@@ -16,7 +16,7 @@ class CustomIntArrayFactoryImplTest {
 
     @Test
     void testCreateArray_ValidPrimitiveArray_ReturnsCustomArray() throws ArrayProcessingException {
-        CustomIntArray expectedCustomArray = new CustomIntArray(new int[]{1, 2, 3});
+        CustomIntArray expectedCustomArray = new CustomIntArray(1,new int[]{1, 2, 3});
 
         CustomIntArray actualCustomArray = factory.createArray(RAW_ARRAY);
 

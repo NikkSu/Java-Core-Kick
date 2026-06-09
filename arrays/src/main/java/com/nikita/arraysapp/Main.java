@@ -95,7 +95,7 @@ public class Main {
         }
 
         logger.info("\n=== REPOSITORY SORTING BY LENGTH ===");
-        repository.sort(CustomArrayComparator.BY_LENGTH);
+        repository.sort(CustomArrayComparator.LENGTH);
 
         for (CustomIntArray arr : repository.getStorage()) {
             logger.info("ID: " + arr.getId() + " | Length: " + arr.length());

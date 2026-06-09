@@ -85,7 +85,7 @@ class ArrayRepositoryTest {
     void testSort_ByLength_SortsCorrectly() {
         int expectedFirstId = 3;
 
-        repository.sort(CustomArrayComparator.BY_LENGTH);
+        repository.sort(CustomArrayComparator.LENGTH);
 
         List<CustomIntArray> sortedList = repository.getStorage();
         CustomIntArray firstElement = sortedList.get(0);

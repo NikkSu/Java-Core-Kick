@@ -34,9 +34,4 @@ public class ArrayWarehouse {
         statsMap.remove(id);
         logger.info("Warehouse statistics removed for Array ID: " + id);
     }
-
-    public void clear() {
-        statsMap.clear();
-        logger.info("Warehouse storage cleared");
-    }
 }

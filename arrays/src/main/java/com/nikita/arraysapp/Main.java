@@ -89,7 +89,7 @@ public class Main {
         int sumThreshold = 50;
         logger.info("Looking for arrays with SUM > " + sumThreshold);
 
-        List<CustomIntArray> richArrays = repository.query(new SumGreaterThanSpecification(sumThreshold, mathService));
+        List<CustomIntArray> richArrays = repository.queryClassic(new SumGreaterThanSpecification(sumThreshold, mathService));
         for (CustomIntArray arr : richArrays) {
             logger.info("Found Array ID: " + arr.getId() + " (Elements: " + arr.length() + ")");
         }

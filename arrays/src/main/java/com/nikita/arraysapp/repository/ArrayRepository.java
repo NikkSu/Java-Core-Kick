@@ -5,6 +5,8 @@ import com.nikita.arraysapp.observer.ArrayEvent;
 import com.nikita.arraysapp.observer.ArrayObserver;
 import com.nikita.arraysapp.specification.Specification;
 import com.nikita.arraysapp.warehouse.ArrayWarehouse;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -13,6 +15,7 @@ import java.util.stream.Stream;
 
 public class ArrayRepository {
     private static ArrayRepository instance;
+    private final Logger logger = LogManager.getLogger(ArrayRepository.class);
     private final List<CustomIntArray> storage = new ArrayList<>();
     private ArrayObserver arrayObserver;
 
@@ -34,12 +37,15 @@ public class ArrayRepository {
     }
 
     public void add(CustomIntArray array) {
-        if (array != null) {
+        boolean isNotNull = array != null;
+        if (isNotNull) {
             storage.add(array);
+            long id = array.getId();
+            logger.info("Array added to repository. Assigned ID: " + id);
 
-            if (arrayObserver != null) {
+            boolean hasObserver = arrayObserver != null;
+            if (hasObserver) {
                 array.attach(arrayObserver);
-
                 ArrayEvent event = new ArrayEvent(array);
                 arrayObserver.update(event);
             }
@@ -47,40 +53,51 @@ public class ArrayRepository {
     }
 
     public void remove(CustomIntArray array) {
-        if (array != null) {
+        boolean isNotNull = array != null;
+        if (isNotNull) {
             storage.remove(array);
+            long id = array.getId();
+            logger.info("Array removed from repository. ID: " + id);
 
-            if (arrayObserver != null) {
+            boolean hasObserver = arrayObserver != null;
+            if (hasObserver) {
                 array.detach(arrayObserver);
-                ArrayWarehouse.getInstance().remove(array.getId());
+                ArrayWarehouse warehouse = ArrayWarehouse.getInstance();
+                warehouse.remove(id);
             }
         }
     }
-    public List<CustomIntArray> streamQuery(Specification<CustomIntArray> spec) {
-        Stream<CustomIntArray> stream = storage.stream();
 
-        List<CustomIntArray> result = stream
-                .filter(spec::isSatisfied)
-                .toList();
-
-        return result;
-    }
-
-    public List<CustomIntArray> query(Specification<CustomIntArray> spec) {
+    public List<CustomIntArray> queryClassic(Specification<CustomIntArray> spec) {
         List<CustomIntArray> result = new ArrayList<>();
+
         for (CustomIntArray array : storage) {
-            if (spec.isSatisfied(array)) {
+            boolean isSatisfied = spec.test(array);
+
+            if (isSatisfied) {
                 result.add(array);
             }
         }
         return result;
     }
 
+    public List<CustomIntArray> functionalQuery(Specification<CustomIntArray> spec) {
+        Stream<CustomIntArray> stream = storage.stream();
+
+        List<CustomIntArray> result = stream
+                .filter(spec)
+                .toList();
+
+        return result;
+    }
+
     public void sort(Comparator<CustomIntArray> comparator) {
         storage.sort(comparator);
+        logger.info("Repository storage sorted using custom comparator");
     }
 
     public void clear() {
         storage.clear();
+        logger.info("Repository storage cleared");
     }
 }

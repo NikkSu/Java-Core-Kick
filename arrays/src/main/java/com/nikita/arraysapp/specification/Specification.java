@@ -1,5 +1,6 @@
 package com.nikita.arraysapp.specification;
 
-public interface Specification<T> {
-    boolean isSatisfied(T item);
+import java.util.function.Predicate;
+
+public interface Specification<T> extends Predicate<T> {
 }

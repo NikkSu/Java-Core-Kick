@@ -2,45 +2,33 @@ package com.nikita.arraysapp.validator;
 
 import com.nikita.arraysapp.validator.impl.ArrayLineValidatorImpl;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ArrayLineValidatorImplTest {
 
-    private static final String VALID_LINE_COMMA = "1, 2, 3";
-    private static final String INVALID_LINE_LETTERS = "1y1 21 32";
-    private static final String INVALID_LINE_DOT = "1.5, 2";
-
     private final ArrayLineValidatorImpl validator = new ArrayLineValidatorImpl();
 
-    @Test
-    void testIsValid_ValidLineWithCommas_ReturnsTrue() {
-        boolean actualResult = validator.isValid(VALID_LINE_COMMA);
-
+    @ParameterizedTest
+    @ValueSource(strings = {"1, 2, 3", "1 - 2 - 3", "  3 4 7  ", "1;2;3"})
+    void testIsValid_ValidStrings_ReturnsTrue(String validLine) {
+        boolean actualResult = validator.isValid(validLine);
         assertTrue(actualResult);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1y1 21 32", "1, 2, x3", "1.2.3.4"})
+    void testIsValid_InvalidStrings_ReturnsFalse(String invalidLine) {
+        boolean actualResult = validator.isValid(invalidLine);
+        assertFalse(actualResult);
     }
 
     @Test
     void testIsValid_NullLine_ReturnsFalse() {
-        String nullLine = null;
-
-        boolean actualResult = validator.isValid(nullLine);
-
-        assertFalse(actualResult);
-    }
-
-    @Test
-    void testIsValid_InvalidLineWithLetters_ReturnsFalse() {
-        boolean actualResult = validator.isValid(INVALID_LINE_LETTERS);
-
-        assertFalse(actualResult);
-    }
-
-    @Test
-    void testIsValid_InvalidLineWithDot_ReturnsFalse() {
-        boolean actualResult = validator.isValid(INVALID_LINE_DOT);
-
+        boolean actualResult = validator.isValid(null);
         assertFalse(actualResult);
     }
 }

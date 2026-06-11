@@ -9,10 +9,8 @@ import org.apache.logging.log4j.Logger;
 public class CustomIntArray extends AbstractCustomArray {
 
     private final Logger logger = LogManager.getLogger(CustomIntArray.class);
-
-    private int[] array;
     private final long id;
-
+    private int[] array;
     private ArrayObserver observer;
 
     public CustomIntArray(long id, int[] array) throws ArrayProcessingException {

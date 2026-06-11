@@ -11,7 +11,7 @@ public class IdSpecification implements Specification<CustomIntArray> {
     }
 
     @Override
-    public boolean isSatisfied(CustomIntArray item) {
+    public boolean test(CustomIntArray item) {
         return item.getId() == desiredId;
     }
 }

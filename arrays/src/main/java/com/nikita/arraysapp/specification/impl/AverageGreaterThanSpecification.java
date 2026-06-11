@@ -18,7 +18,7 @@ public class AverageGreaterThanSpecification implements Specification<CustomIntA
     }
 
     @Override
-    public boolean isSatisfied(CustomIntArray item) {
+    public boolean test(CustomIntArray item) {
         ArrayWarehouse arrayWarehouse = ArrayWarehouse.getInstance();
         WarehouseStats stats = arrayWarehouse.getStats(item.getId());
 

@@ -43,11 +43,11 @@ class ArrayRepositoryTest {
     }
 
     @Test
-    void testQuery_IdSpecification_ReturnsCorrectArray() {
+    void testQuery_Classic_IdSpecification_ReturnsCorrectArray() {
         int targetId = 2;
         int expectedSize = 1;
 
-        List<CustomIntArray> result = repository.query(new IdSpecification(targetId));
+        List<CustomIntArray> result = repository.queryClassic(new IdSpecification(targetId));
 
         int actualSize = result.size();
         assertEquals(expectedSize, actualSize);
@@ -57,22 +57,22 @@ class ArrayRepositoryTest {
     }
 
     @Test
-    void testQuery_SumGreaterThanSpecification_ReturnsCorrectArrays() {
+    void testQuery_Classic_SumGreaterThanSpecification_ReturnsCorrectArrays() {
         int sumThreshold = 40;
         int expectedSize = 2;
 
-        List<CustomIntArray> result = repository.query(new SumGreaterThanSpecification(sumThreshold, mathService));
+        List<CustomIntArray> result = repository.queryClassic(new SumGreaterThanSpecification(sumThreshold, mathService));
 
         int actualSize = result.size();
         assertEquals(expectedSize, actualSize);
     }
 
     @Test
-    void testQuery_LengthLessThanSpecification_ReturnsCorrectArrays() {
+    void testQuery_Classic_LengthLessThanSpecification_ReturnsCorrectArrays() {
         int lengthThreshold = 3;
         int expectedSize = 1;
 
-        List<CustomIntArray> result = repository.query(new LengthLessThanSpecification(lengthThreshold));
+        List<CustomIntArray> result = repository.queryClassic(new LengthLessThanSpecification(lengthThreshold));
 
         int actualSize = result.size();
         assertEquals(expectedSize, actualSize);

@@ -11,7 +11,7 @@ public class LengthLessThanSpecification implements Specification<CustomIntArray
     }
 
     @Override
-    public boolean isSatisfied(CustomIntArray item) {
+    public boolean test(CustomIntArray item) {
         return item.length() < maxLength;
     }
 }

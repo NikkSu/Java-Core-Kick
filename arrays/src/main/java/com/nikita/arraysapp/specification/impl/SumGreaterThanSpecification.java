@@ -18,7 +18,7 @@ public class SumGreaterThanSpecification implements Specification<CustomIntArray
     }
 
     @Override
-    public boolean isSatisfied(CustomIntArray item) {
+    public boolean test(CustomIntArray item) {
         ArrayWarehouse warehouse = ArrayWarehouse.getInstance();
         WarehouseStats stats = warehouse.getStats(item.getId());
 

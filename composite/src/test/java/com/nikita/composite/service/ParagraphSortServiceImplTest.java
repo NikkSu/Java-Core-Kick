@@ -23,7 +23,6 @@ class ParagraphSortServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        // Собираем реальную цепь парсеров для быстрой генерации абзацев
         SymbolParserImpl symbolParser = new SymbolParserImpl();
         WordParserImpl wordParser = new WordParserImpl(symbolParser);
         LexemeParserImpl lexemeParser = new LexemeParserImpl(wordParser);

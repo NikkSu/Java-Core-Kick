@@ -26,8 +26,6 @@ public class SymbolParserImpl implements TextParser {
                 SymbolLeaf leaf = new SymbolLeaf(symbol, ComponentType.SYMBOL);
                 component.add(leaf);
             }
-        } else {
-            logger.warn("Received null text for symbol parsing");
         }
     }
 }

@@ -34,8 +34,6 @@ public class LexemeParserImpl implements TextParser {
                     nextParser.parse(lexemeComponent, lexeme);
                 }
             }
-        } else {
-            logger.warn("Received null text for lexeme parsing");
         }
     }
 }

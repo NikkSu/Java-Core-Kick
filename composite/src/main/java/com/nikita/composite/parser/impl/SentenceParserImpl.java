@@ -34,8 +34,6 @@ public class SentenceParserImpl implements TextParser {
                     nextParser.parse(sentenceComponent, sentence);
                 }
             }
-        } else {
-            logger.warn("Received null text for sentence parsing");
         }
     }
 }

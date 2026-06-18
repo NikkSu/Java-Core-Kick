@@ -34,8 +34,6 @@ public class ParagraphParserImpl implements TextParser {
                     nextParser.parse(paragraphComponent, paragraph);
                 }
             }
-        } else {
-            logger.warn("Received null text for paragraph parsing");
         }
     }
 }

@@ -41,8 +41,6 @@ public class WordParserImpl implements TextParser {
                     }
                 }
             }
-        } else {
-            logger.warn("Received null text for word parsing");
         }
     }
 }

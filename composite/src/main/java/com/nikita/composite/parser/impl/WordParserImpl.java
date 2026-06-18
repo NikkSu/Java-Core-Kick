@@ -10,8 +10,6 @@ import org.apache.logging.log4j.Logger;
 public class WordParserImpl implements TextParser {
 
     private final Logger logger = LogManager.getLogger(WordParserImpl.class);
-    private static final String WORD_PUNCTUATION_REGEX = "(?=[\\p{Punct}])|(?<=[\\p{Punct}])";
-    private static final String WORD_CHECK_REGEX = ".*\\w+.*";
     private final TextParser nextParser;
 
     public WordParserImpl(TextParser nextParser) {
@@ -43,8 +41,6 @@ public class WordParserImpl implements TextParser {
                     }
                 }
             }
-        } else {
-            logger.warn("Received null text for word parsing");
         }
     }
 }

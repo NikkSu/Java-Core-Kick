@@ -10,7 +10,6 @@ import org.apache.logging.log4j.Logger;
 public class SentenceParserImpl implements TextParser {
 
     private final Logger logger = LogManager.getLogger(SentenceParserImpl.class);
-    private static final String SENTENCE_REGEX = "(?<=[.!?…])\\s+";
     private final TextParser nextParser;
 
     public SentenceParserImpl(TextParser nextParser) {
@@ -35,8 +34,6 @@ public class SentenceParserImpl implements TextParser {
                     nextParser.parse(sentenceComponent, sentence);
                 }
             }
-        } else {
-            logger.warn("Received null text for sentence parsing");
         }
     }
 }

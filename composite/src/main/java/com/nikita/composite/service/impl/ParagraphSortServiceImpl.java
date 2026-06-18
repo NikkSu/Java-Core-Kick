@@ -36,8 +36,6 @@ public class ParagraphSortServiceImpl implements ParagraphSortService {
                     root.add(p);
                 }
                 logger.info("Sorted paragraphs by letter: " + letter);
-            } else {
-                logger.warn("Root is not TEXT, cannot sort paragraphs");
             }
         }
     }

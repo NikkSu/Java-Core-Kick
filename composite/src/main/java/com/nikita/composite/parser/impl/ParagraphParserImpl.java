@@ -10,7 +10,6 @@ import org.apache.logging.log4j.Logger;
 public class ParagraphParserImpl implements TextParser {
 
     private final Logger logger = LogManager.getLogger(ParagraphParserImpl.class);
-    private static final String PARAGRAPH_REGEX = "\\n";
     private final TextParser nextParser;
 
     public ParagraphParserImpl(TextParser nextParser) {
@@ -35,8 +34,6 @@ public class ParagraphParserImpl implements TextParser {
                     nextParser.parse(paragraphComponent, paragraph);
                 }
             }
-        } else {
-            logger.warn("Received null text for paragraph parsing");
         }
     }
 }

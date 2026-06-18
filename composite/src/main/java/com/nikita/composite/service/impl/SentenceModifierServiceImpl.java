@@ -52,8 +52,6 @@ public class SentenceModifierServiceImpl implements SentenceModifierService {
                 }
             }
             logger.info("Successfully swapped lexemes");
-        } else {
-            logger.warn("Root component is null");
         }
     }
 }

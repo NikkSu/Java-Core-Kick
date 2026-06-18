@@ -32,8 +32,6 @@ public class SentenceAnalyzerServiceImpl implements SentenceAnalyzerService {
             }
             int size = result.size();
             logger.info("Found sentences with identical words: " + size);
-        } else {
-            logger.warn("Root component is null");
         }
         return result;
     }

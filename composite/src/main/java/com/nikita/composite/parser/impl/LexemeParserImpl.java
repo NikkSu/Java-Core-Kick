@@ -10,7 +10,6 @@ import org.apache.logging.log4j.Logger;
 public class LexemeParserImpl implements TextParser {
 
     private final Logger logger = LogManager.getLogger(LexemeParserImpl.class);
-    private static final String LEXEME_REGEX = "\\s+";
     private final TextParser nextParser;
 
     public LexemeParserImpl(TextParser nextParser) {

@@ -59,7 +59,7 @@ public class TextComposite implements TextComponent {
                 if (isText) {
                     stringBuilder.append("\n");
                 } else if (isParagraph) {
-                    stringBuilder.append(" ");
+                    stringBuilder.append("\t");
                 } else if (isSentence) {
                     stringBuilder.append(" ");
                 }

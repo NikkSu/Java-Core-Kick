@@ -7,12 +7,12 @@ import com.nikita.composite.parser.TextParser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class ParagraphParserImpl implements TextParser {
+public class LexemeParser implements TextParser {
 
-    private final Logger logger = LogManager.getLogger(ParagraphParserImpl.class);
+    private final Logger logger = LogManager.getLogger(LexemeParser.class);
     private final TextParser nextParser;
 
-    public ParagraphParserImpl(TextParser nextParser) {
+    public LexemeParser(TextParser nextParser) {
         this.nextParser = nextParser;
     }
 
@@ -21,17 +21,17 @@ public class ParagraphParserImpl implements TextParser {
         boolean isNotNull = text != null;
 
         if (isNotNull) {
-            String[] paragraphs = text.split(PARAGRAPH_REGEX);
-            int length = paragraphs.length;
-            logger.info("Parsed text into paragraphs. Count: " + length);
+            String[] lexemes = text.split(LEXEME_REGEX);
+            int length = lexemes.length;
+            logger.debug("Parsed sentence into lexemes. Count: " + length);
 
-            for (String paragraph : paragraphs) {
-                TextComposite paragraphComponent = new TextComposite(ComponentType.PARAGRAPH);
-                component.add(paragraphComponent);
+            for (String lexeme : lexemes) {
+                TextComposite lexemeComponent = new TextComposite(ComponentType.LEXEME);
+                component.add(lexemeComponent);
 
                 boolean hasNextParser = nextParser != null;
                 if (hasNextParser) {
-                    nextParser.parse(paragraphComponent, paragraph);
+                    nextParser.parse(lexemeComponent, lexeme);
                 }
             }
         }

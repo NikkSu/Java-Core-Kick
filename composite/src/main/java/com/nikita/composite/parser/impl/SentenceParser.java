@@ -7,12 +7,12 @@ import com.nikita.composite.parser.TextParser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class SentenceParserImpl implements TextParser {
+public class SentenceParser implements TextParser {
 
-    private final Logger logger = LogManager.getLogger(SentenceParserImpl.class);
+    private final Logger logger = LogManager.getLogger(SentenceParser.class);
     private final TextParser nextParser;
 
-    public SentenceParserImpl(TextParser nextParser) {
+    public SentenceParser(TextParser nextParser) {
         this.nextParser = nextParser;
     }
 

@@ -7,12 +7,12 @@ import com.nikita.composite.parser.TextParser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class WordParserImpl implements TextParser {
+public class WordParser implements TextParser {
 
-    private final Logger logger = LogManager.getLogger(WordParserImpl.class);
+    private final Logger logger = LogManager.getLogger(WordParser.class);
     private final TextParser nextParser;
 
-    public WordParserImpl(TextParser nextParser) {
+    public WordParser(TextParser nextParser) {
         this.nextParser = nextParser;
     }
 
@@ -26,7 +26,7 @@ public class WordParserImpl implements TextParser {
             logger.debug("Parsed lexeme into words and punctuation. Count: " + length);
 
             for (String part : parts) {
-                boolean isEmpty = part.isEmpty();
+                boolean isEmpty = part.isBlank();
 
                 if (!isEmpty) {
                     boolean isWord = part.matches(WORD_CHECK_REGEX);

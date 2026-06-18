@@ -4,11 +4,11 @@ import com.nikita.composite.entity.ComponentType;
 import com.nikita.composite.entity.TextComposite;
 import com.nikita.composite.exception.TextProcessingException;
 import com.nikita.composite.parser.TextParser;
-import com.nikita.composite.parser.impl.LexemeParserImpl;
-import com.nikita.composite.parser.impl.ParagraphParserImpl;
-import com.nikita.composite.parser.impl.SentenceParserImpl;
-import com.nikita.composite.parser.impl.SymbolParserImpl;
-import com.nikita.composite.parser.impl.WordParserImpl;
+import com.nikita.composite.parser.impl.LexemeParser;
+import com.nikita.composite.parser.impl.ParagraphParser;
+import com.nikita.composite.parser.impl.SentenceParser;
+import com.nikita.composite.parser.impl.SymbolParser;
+import com.nikita.composite.parser.impl.WordParser;
 import com.nikita.composite.reader.impl.FileTextDataReaderImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,11 +29,11 @@ class TextParsingIntegrationTest {
     void setUp() {
         reader = new FileTextDataReaderImpl();
 
-        SymbolParserImpl symbolParser = new SymbolParserImpl();
-        WordParserImpl wordParser = new WordParserImpl(symbolParser);
-        LexemeParserImpl lexemeParser = new LexemeParserImpl(wordParser);
-        SentenceParserImpl sentenceParser = new SentenceParserImpl(lexemeParser);
-        chainParser = new ParagraphParserImpl(sentenceParser);
+        SymbolParser symbolParser = new SymbolParser();
+        WordParser wordParser = new WordParser(symbolParser);
+        LexemeParser lexemeParser = new LexemeParser(wordParser);
+        SentenceParser sentenceParser = new SentenceParser(lexemeParser);
+        chainParser = new ParagraphParser(sentenceParser);
     }
 
     @Test

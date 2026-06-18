@@ -14,18 +14,17 @@ public class SymbolLeaf implements TextComponent {
 
     @Override
     public void add(TextComponent component) {
-        throwUnsupported();
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void remove(TextComponent component) {
-        throwUnsupported();
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public List<TextComponent> getChildren() {
-        throwUnsupported();
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -68,10 +67,6 @@ public class SymbolLeaf implements TextComponent {
         result = 31 * result + typeHash;
         result = 31 * result + Character.hashCode(value);
         return result;
-    }
-
-    private void throwUnsupported() {
-        throw new UnsupportedOperationException();
     }
 
     @Override

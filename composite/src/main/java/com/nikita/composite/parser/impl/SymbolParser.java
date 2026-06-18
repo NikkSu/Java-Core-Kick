@@ -7,11 +7,11 @@ import com.nikita.composite.parser.TextParser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class SymbolParserImpl implements TextParser {
+public class SymbolParser implements TextParser {
 
-    private final Logger logger = LogManager.getLogger(SymbolParserImpl.class);
+    private final Logger logger = LogManager.getLogger(SymbolParser.class);
 
-    public SymbolParserImpl() {}
+    public SymbolParser() {}
 
     @Override
     public void parse(TextComponent component, String text) {
